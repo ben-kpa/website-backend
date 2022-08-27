@@ -47,6 +47,14 @@ INSTALLED_APPS = [
 ]
 INSTALLED_APPS += ('accounts',)
 INSTALLED_APPS += ('rest_framework',)
+INSTALLED_APPS += ('rest_framework.authtoken',)
+INSTALLED_APPS += ('dj_rest_auth',)
+
+INSTALLED_APPS += ('django.contrib.sites',)
+INSTALLED_APPS += ('allauth',)
+INSTALLED_APPS += ('allauth.account',)
+INSTALLED_APPS += ('allauth.socialaccount',)
+INSTALLED_APPS += ('dj_rest_auth.registration',)
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -73,6 +81,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                # added
+                'django.template.context_processors.request',
             ],
         },
     },
@@ -141,7 +151,15 @@ REST_FRAMEWORK = {
         "DEFAULT_PERMISSION_CLASSES": [
             "rest_framework.permissions.AllowAny",
         ],
+        "DEFAULT_AUTHENTICATION_CLASSES": [
+              "rest_framework.authentication.SessionAuthentication",
+              "rest_framework.authentication.TokenAuthentication",
+          ]
       }
+
+
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+SITE_ID = 1
 
 
 
