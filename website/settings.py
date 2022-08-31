@@ -45,11 +45,24 @@ INSTALLED_APPS = [
     # 3rd party
     'whitenoise.runserver_nostatic',
 ]
+INSTALLED_APPS += ('accounts',)
+INSTALLED_APPS += ('rest_framework',)
+INSTALLED_APPS += ('rest_framework.authtoken',)
+INSTALLED_APPS += ('dj_rest_auth',)
+
+INSTALLED_APPS += ('django.contrib.sites',)
+INSTALLED_APPS += ('allauth',)
+INSTALLED_APPS += ('allauth.account',)
+INSTALLED_APPS += ('allauth.socialaccount',)
+INSTALLED_APPS += ('dj_rest_auth.registration',)
+INSTALLED_APPS += ('corsheaders',)
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    # Custom
     'whitenoise.middleware.WhiteNoiseMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -70,6 +83,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                # added
+                'django.template.context_processors.request',
             ],
         },
     },
@@ -130,3 +145,25 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+AUTH_USER_MODEL = 'accounts.CustomUser'
+
+REST_FRAMEWORK = {
+        "DEFAULT_PERMISSION_CLASSES": [
+            "rest_framework.permissions.AllowAny",
+        ],
+        "DEFAULT_AUTHENTICATION_CLASSES": [
+              "rest_framework.authentication.SessionAuthentication",
+              "rest_framework.authentication.TokenAuthentication",
+          ]
+      }
+
+
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+SITE_ID = 1
+
+CORS_ORIGIN_ALLOW_ALL = True
+
+
+
