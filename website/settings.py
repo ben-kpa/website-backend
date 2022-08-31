@@ -55,12 +55,14 @@ INSTALLED_APPS += ('allauth',)
 INSTALLED_APPS += ('allauth.account',)
 INSTALLED_APPS += ('allauth.socialaccount',)
 INSTALLED_APPS += ('dj_rest_auth.registration',)
+INSTALLED_APPS += ('corsheaders',)
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     # Custom
     'whitenoise.middleware.WhiteNoiseMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -161,7 +163,7 @@ REST_FRAMEWORK = {
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 SITE_ID = 1
 
-
+CORS_ORIGIN_ALLOW_ALL = True
 
 
 
