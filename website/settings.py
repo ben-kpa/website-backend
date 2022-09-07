@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
 ]
 INSTALLED_APPS += ('accounts',)
+INSTALLED_APPS += ('things',)
+
 INSTALLED_APPS += ('rest_framework',)
 INSTALLED_APPS += ('rest_framework.authtoken',)
 INSTALLED_APPS += ('dj_rest_auth',)
